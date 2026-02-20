@@ -39,30 +39,78 @@ export default function AboutPage() {
         <p className="section-subtitle">
           Messages from our leadership team.
         </p>
-        <div className="card-grid">
-          <div className="card">
-            <h3>Director&apos;s Message</h3>
-            <p><strong>Dr Sharvani Ajit Kanakaraddi</strong></p>
+
+        <div className="message-block">
+          <h3 className="message-block-title">Director&apos;s Message</h3>
+          <div className="message-body">
             <p>
-              It is my privilege to lead an institution that stands for quality and compassion in
-              nursing education. We strive to create an environment where every student can grow into
-              a confident, competent, and caring healthcare professional.
+              Dear Principal, faculty &amp; students greeting of peace to all of you &amp; heartly welcome to The
+              Dr V P Kanakaraddi Memorial College Of Nursing. A unit of Om Sai Education Society&apos;s.
+            </p>
+            <p>
+              We welcome the future noble professionals to this temple of learning. Dr V P Kanakaraddi
+              Memorial College Of Nursing with our tradition of introducing high quality services. Our
+              alumni are our ambassadors who spread the fame of Dr V P Kanakaraddi Memorial
+              College Of Nursing. Our strengths are our best infrastructure, dedicated faculties and
+              fully fledged Laboratory and Library.
+            </p>
+            <p className="message-signature">
+              <strong>Dr Sharvani Ajit Kanakaraddi</strong><br />
+              Director
             </p>
           </div>
-          <div className="card">
-            <h3>Management Message</h3>
+        </div>
+
+        <div className="message-block message-block-alt">
+          <h3 className="message-block-title">Management Message</h3>
+          <div className="message-body">
             <p>
-              Our management is dedicated to supporting the college with the best resources,
-              infrastructure, and policies so that our students and faculty can focus on learning
-              and teaching excellence.
+              Nurses collaborate with patients, families, and other health team members to plan and
+              provide nursing care that will achieve an optimal level of health and wellness, or when this
+              is not possible, support the experience of loss and death.
+            </p>
+            <p>
+              Our aim is to help you become dedicated healthcare professionals to serve the sick and
+              needy members of our society responsibly, respectfully and competently while being
+              morally sensitive for the betterment of their health.
+            </p>
+            <p>
+              The methods of instruction at our institution are as per the Rajiv Gandhi University of Health
+              Sciences and Indian Nursing Council. We believe success in education depends on better
+              infrastructure, finer resources for learning and effective discussion among faculty and
+              students. We select a class of people with high ethical standards and academic
+              performance from a range of work experiences, backgrounds, and personal characteristics who
+              display a commitment to serve people through our nursing education.
             </p>
           </div>
-          <div className="card">
-            <h3>Principal&apos;s Message</h3>
+        </div>
+
+        <div className="message-block">
+          <h3 className="message-block-title">Principal&apos;s Message</h3>
+          <div className="message-body">
             <p>
-              As Principal, I am committed to upholding academic standards and fostering a culture
-              of respect, integrity, and continuous improvement. Together we build the future of
-              nursing.
+              It is my pleasure to welcome you to The Dr V P Kanakaraddi Memorial College Of Nursing, an
+              institution that was started with the noble mission of alleviating the pain of the sick and needy.
+              We aim for excellence in the field of nursing education and practice, constantly working
+              towards raising the bar for students of the nursing profession, such that our students can face
+              the exacting demands of the health care sector.
+            </p>
+            <p>
+              We, at The Dr V P Kanakaraddi Memorial College Of Nursing, have excellent infrastructure,
+              competent teaching faculty with years of experience and follow innovative methods of teaching
+              to convey the importance of the course that the students have embarked upon. We also make
+              sure that the student&apos;s all round development as an intelligent, alert member of society, is
+              nourished. We provide an arena of extracurricular activities which brings out the best in the
+              student.
+            </p>
+            <p>
+              We welcome you to the family of The Dr V P Kanakaraddi Memorial College Of Nursing for a
+              memorable stay to pursue and successfully complete your education and to achieve higher
+              goals in life.
+            </p>
+            <p className="message-signature">
+              <strong>Best Of Luck</strong><br />
+              Principal
             </p>
           </div>
         </div>
