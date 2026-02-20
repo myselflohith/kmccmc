@@ -37,7 +37,7 @@ export default function AboutPage() {
       <section className="page-section" style={{ background: 'var(--color-off-white)' }}>
         <h2 className="section-title">Leadership</h2>
         <p className="section-subtitle">
-          Messages from our leadership team.
+          Messages fraom our leadership team.
         </p>
 
         <div className="message-block">

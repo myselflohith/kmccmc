@@ -5,13 +5,13 @@ import React from 'react'
 
 const quickLinks = [
   { href: '/', label: 'Home' },
-  { href: '/about', label: 'About' },
-  { href: '/course', label: 'Course' },
-  { href: '/facilities', label: 'Facilities' },
-  { href: '/faculty', label: 'Faculty' },
-  { href: '/student-life', label: 'Student Life' },
-  { href: '/gallery', label: 'Gallery' },
-  { href: '/contact', label: 'Contact' },
+  { href: '/#about', label: 'About' },
+  { href: '/#course', label: 'Course' },
+  { href: '/#facilities', label: 'Facilities' },
+  { href: '/#faculty', label: 'Faculty' },
+  { href: '/#student-life', label: 'Student Life' },
+  { href: '/#gallery', label: 'Gallery' },
+  { href: '/#contact', label: 'Contact' },
 ]
 
 export function Footer() {
