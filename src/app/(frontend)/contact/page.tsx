@@ -1,5 +1,5 @@
 import React from 'react'
-import { AdmissionInquiryForm, ContactForm } from '@/components/ContactForms'
+import { AdmissionInquiryForm } from '@/components/ContactForms'
 
 export const metadata = {
   title: 'Contact | Dr V P Kanakaraddi Memorial College Of Nursing',
@@ -53,9 +53,8 @@ export default function ContactPage() {
             </div>
           </div>
           <div className="contact-forms">
-            <ContactForm />
             <div id="admission">
-              <AdmissionInquiryForm />
+              <AdmissionInquiryForm whatsappNumber={address.phone} />
             </div>
           </div>
         </div>

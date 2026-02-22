@@ -69,6 +69,8 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    gallery: Gallery;
+    'gallery-functions': GalleryFunction;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -78,6 +80,8 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    gallery: GallerySelect<false> | GallerySelect<true>;
+    'gallery-functions': GalleryFunctionsSelect<false> | GalleryFunctionsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -159,6 +163,58 @@ export interface Media {
   focalY?: number | null;
 }
 /**
+ * Photos for the website gallery. Upload function photos, events, and campus life.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gallery".
+ */
+export interface Gallery {
+  id: number;
+  /**
+   * Upload or select an image from Media.
+   */
+  image: number | Media;
+  /**
+   * Short caption for the photo (e.g. event name, description).
+   */
+  caption?: string | null;
+  /**
+   * Optional: group photos by type.
+   */
+  category?: ('function' | 'campus' | 'academic' | 'sports-cultural' | 'other') | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * One function/event with multiple photos. Add a function (e.g. Annual Day, Sports Day) and upload all its images here.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gallery-functions".
+ */
+export interface GalleryFunction {
+  id: number;
+  /**
+   * e.g. Annual Day 2024, Sports Day, Cultural Fest
+   */
+  name: string;
+  /**
+   * Optional brief description of the function.
+   */
+  description?: string | null;
+  /**
+   * Add all photos for this function. Each item is one image with optional caption.
+   */
+  items?:
+    | {
+        image: number | Media;
+        caption?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
@@ -189,6 +245,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'gallery';
+        value: number | Gallery;
+      } | null)
+    | ({
+        relationTo: 'gallery-functions';
+        value: number | GalleryFunction;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -271,6 +335,34 @@ export interface MediaSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gallery_select".
+ */
+export interface GallerySelect<T extends boolean = true> {
+  image?: T;
+  caption?: T;
+  category?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gallery-functions_select".
+ */
+export interface GalleryFunctionsSelect<T extends boolean = true> {
+  name?: T;
+  description?: T;
+  items?:
+    | T
+    | {
+        image?: T;
+        caption?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

@@ -20,7 +20,7 @@ export default function AboutPage() {
         <p className="section-subtitle">
           Founded in 2023, our college is built on a legacy of dedication to healthcare education.
         </p>
-        <div className="card" style={{ maxWidth: '720px', margin: '0 auto' }}>
+        <div className="card about-intro-card">
           <p style={{ marginBottom: '1rem' }}>
             Dr V P Kanakaraddi Memorial College Of Nursing is affiliated to Rajiv Gandhi University of
             Health Sciences (RGUHS), recognized by the Government of Karnataka, and approved by the

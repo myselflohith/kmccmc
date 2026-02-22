@@ -1,12 +1,14 @@
 import React from 'react'
 import { Gallery } from '@/components/Gallery'
+import { getGalleryFunctions } from '@/lib/gallery'
 
 export const metadata = {
   title: 'Photo Gallery | Dr V P Kanakaraddi Memorial College Of Nursing',
   description: 'Campus and college life in pictures.',
 }
 
-export default function GalleryPage() {
+export default async function GalleryPage() {
+  const galleryFunctions = await getGalleryFunctions()
   return (
     <>
       <section className="hero">
@@ -17,7 +19,7 @@ export default function GalleryPage() {
       </section>
 
       <section className="page-section">
-        <Gallery />
+        <Gallery functions={galleryFunctions} />
       </section>
     </>
   )
