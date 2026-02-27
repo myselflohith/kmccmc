@@ -6,29 +6,6 @@ import React, { useState } from 'react'
 /** Number of image slots in the first row before the "+ N" button (button is the last cell of the first row). */
 const FIRST_ROW_IMAGE_COUNT = 2
 
-const placeholderFunctions = [
-  {
-    id: 'p1',
-    name: 'Campus & Facilities',
-    description: null,
-    images: [
-      { id: '1', src: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=600', alt: 'Nursing education' },
-      { id: '2', src: 'https://images.unsplash.com/photo-1584515933487-779824d29309?w=600', alt: 'Campus' },
-      { id: '3', src: 'https://images.unsplash.com/photo-1587351021759-3e566b6af7cc?w=600', alt: 'Laboratory' },
-    ],
-  },
-  {
-    id: 'p2',
-    name: 'Student Life',
-    description: null,
-    images: [
-      { id: '4', src: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=600', alt: 'Clinical practice' },
-      { id: '5', src: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=600', alt: 'Students' },
-      { id: '6', src: 'https://images.unsplash.com/photo-1551601651-2a8555f1a136?w=600', alt: 'Library' },
-    ],
-  },
-]
-
 export type GalleryImageItem = {
   id: string
   src: string
@@ -50,8 +27,8 @@ type GalleryProps = {
 }
 
 export function Gallery({ functions, images }: GalleryProps) {
-  const functionWise = functions?.length ? functions : (images?.length ? null : placeholderFunctions)
-  const flatImages = functionWise ? functionWise.flatMap((f) => f.images) : (images?.length ? images : placeholderFunctions.flatMap((f) => f.images))
+  const functionWise = functions?.length ? functions : (images?.length ? null : null)
+  const flatImages = functionWise ? functionWise.flatMap((f) => f.images) : (images?.length ? images : [])
   const [lightboxAt, setLightboxAt] = useState<{ funcIndex: number; imgIndex: number } | null>(null)
   const [expandedFuncIds, setExpandedFuncIds] = useState<Set<string>>(new Set())
 
@@ -68,6 +45,11 @@ export function Gallery({ functions, images }: GalleryProps) {
         ? functionWise![lightboxAt.funcIndex]?.images[lightboxAt.imgIndex]
         : flatImages[lightboxAt.imgIndex]
 
+  if (!showByFunction && flatImages.length === 0) {
+    // No gallery content available from CMS; render nothing
+    return null
+  }
+
   return (
     <>
       {showByFunction ? (
@@ -78,6 +60,7 @@ export function Gallery({ functions, images }: GalleryProps) {
             const visibleImages = isExpanded ? func.images : firstRowImages
             const hasMore = func.images.length > FIRST_ROW_IMAGE_COUNT
             const moreCount = func.images.length - FIRST_ROW_IMAGE_COUNT
+            const previewImage = hasMore ? func.images[FIRST_ROW_IMAGE_COUNT] : undefined
 
             return (
               <section key={func.id} className="gallery-function-section">
@@ -109,6 +92,19 @@ export function Gallery({ functions, images }: GalleryProps) {
                       onClick={() => loadMore(func.id)}
                       aria-label={`Load ${moreCount} more images`}
                     >
+                      {previewImage && (
+                        <span className="gallery-load-more-bg">
+                          <Image
+                            src={previewImage.src}
+                            alt={previewImage.alt}
+                            fill
+                            sizes="(max-width: 768px) 100vw, 33vw"
+                            className="gallery-load-more-img"
+                            unoptimized={!previewImage.src.startsWith('https://images.unsplash.com')}
+                          />
+                        </span>
+                      )}
+                      <span className="gallery-load-more-overlay" />
                       <span className="gallery-load-more-icon">+</span>
                       <span className="gallery-load-more-count">{moreCount}</span>
                     </button>
