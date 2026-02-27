@@ -194,6 +194,10 @@ export interface Gallery {
 export interface GalleryFunction {
   id: number;
   /**
+   * Uncheck to hide this function from the gallery without deleting it.
+   */
+  show?: boolean | null;
+  /**
    * e.g. Annual Day 2024, Sports Day, Cultural Fest
    */
   name: string;
@@ -206,8 +210,9 @@ export interface GalleryFunction {
    */
   items?:
     | {
-        image: number | Media;
+        image?: (number | null) | Media;
         caption?: string | null;
+        show?: boolean | null;
         id?: string | null;
       }[]
     | null;
@@ -352,6 +357,7 @@ export interface GallerySelect<T extends boolean = true> {
  * via the `definition` "gallery-functions_select".
  */
 export interface GalleryFunctionsSelect<T extends boolean = true> {
+  show?: T;
   name?: T;
   description?: T;
   items?:
@@ -359,6 +365,7 @@ export interface GalleryFunctionsSelect<T extends boolean = true> {
     | {
         image?: T;
         caption?: T;
+        show?: T;
         id?: T;
       };
   updatedAt?: T;

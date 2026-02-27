@@ -51,13 +51,16 @@ export async function getGalleryFunctions(): Promise<GalleryFunctionItem[]> {
   })
 
   return result.docs
-    .filter((doc) => doc.items && doc.items.length > 0)
+    .filter((doc) => doc.items && doc.items.length > 0 && doc.show !== false)
     .map((doc) => ({
       id: String(doc.id),
       name: doc.name,
       description: doc.description ?? null,
       images: doc.items!
-        .filter((item): item is typeof item & { image: Media } => item.image != null && typeof item.image === 'object' && 'url' in item.image)
+        .filter(
+          (item): item is typeof item & { image: Media } =>
+            item.show !== false && item.image != null && typeof item.image === 'object' && 'url' in item.image,
+        )
         .map((item) => mediaToImage(item.image, item.caption, baseUrl)),
     }))
     .filter((f) => f.images.length > 0)

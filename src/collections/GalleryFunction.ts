@@ -12,6 +12,15 @@ export const GalleryFunction: CollectionConfig = {
   },
   fields: [
     {
+      name: 'show',
+      type: 'checkbox',
+      label: 'Show this function in website gallery',
+      defaultValue: true,
+      admin: {
+        description: 'Uncheck to hide this function from the gallery without deleting it.',
+      },
+    },
+    {
       name: 'name',
       type: 'text',
       required: true,
@@ -34,13 +43,19 @@ export const GalleryFunction: CollectionConfig = {
           name: 'image',
           type: 'upload',
           relationTo: 'media',
-          required: true,
+          required: false,
           label: 'Image',
         },
         {
           name: 'caption',
           type: 'text',
           label: 'Caption',
+        },
+        {
+          name: 'show',
+          type: 'checkbox',
+          label: 'Show this photo in gallery',
+          defaultValue: true,
         },
       ],
       admin: { description: 'Add all photos for this function. Each item is one image with optional caption.' },
