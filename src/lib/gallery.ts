@@ -15,16 +15,12 @@ export type GalleryFunctionItem = {
   images: GalleryImage[]
 }
 
-function getBaseUrl(): string {
-  if (typeof process.env.NEXT_PUBLIC_SITE_URL === 'string' && process.env.NEXT_PUBLIC_SITE_URL) {
-    return process.env.NEXT_PUBLIC_SITE_URL.replace(/\/$/, '')
-  }
-  return 'http://localhost:3000'
-}
-
-function mediaToImage(media: Media, caption?: string | null, baseUrl?: string): GalleryImage {
+// Build an image URL suitable for the current origin. Payload already stores
+// URLs like `/media/xyz.jpg`, so we keep them relative instead of adding a
+// hardcoded host. This works in both dev and production.
+function mediaToImage(media: Media, caption?: string | null): GalleryImage {
   const url = media.url
-  const src = url?.startsWith('http') ? url : `${baseUrl ?? getBaseUrl()}${url?.startsWith('/') ? '' : '/'}${url ?? ''}`
+  const src = url ?? ''
   return {
     id: String(media.id),
     src,
@@ -41,7 +37,6 @@ export async function getGalleryImages(): Promise<GalleryImage[]> {
 /** Function-wise gallery: each function has a name and multiple images. */
 export async function getGalleryFunctions(): Promise<GalleryFunctionItem[]> {
   const payload = await getPayload({ config: configPromise })
-  const baseUrl = getBaseUrl()
 
   const result = await payload.find({
     collection: 'gallery-functions',
@@ -61,7 +56,7 @@ export async function getGalleryFunctions(): Promise<GalleryFunctionItem[]> {
           (item): item is typeof item & { image: Media } =>
             item.show !== false && item.image != null && typeof item.image === 'object' && 'url' in item.image,
         )
-        .map((item) => mediaToImage(item.image, item.caption, baseUrl)),
+        .map((item) => mediaToImage(item.image, item.caption)),
     }))
     .filter((f) => f.images.length > 0)
 }
