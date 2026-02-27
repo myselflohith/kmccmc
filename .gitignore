@@ -40,6 +40,10 @@ next-env.d.ts
 
 .env
 
+# local database file (SQLite)
+/kmccmc.db
+
+# uploaded media (managed on server, not in git)
 /media
 
 # Playwright
