@@ -7,10 +7,15 @@ export const metadata = {
 }
 
 const address = {
-  line1: 'Dr V P Kanakaraddi Memorial College Of Nursing',
-  line2: 'Campus Address',
-  city: 'Karnataka',
-  phone: '+91 98765 43210',
+  line1: 'The Dr V P Kanakaraddi Memorial College Of Nursing',
+  line2: 'Main Road, Venkatesh Hospital, Mahalingpur',
+  city: 'Bagalkote - 587312',
+  phones: [
+    { display: '08350-271236', tel: '+918350271236' },
+    { display: '08350-200106', tel: '+918350200106' },
+    { display: '8792616004', tel: '+918792616004' },
+    { display: '8722350513', tel: '+918722350513' },
+  ],
   email: 'info@vpkmcn.edu.in',
 }
 
@@ -33,7 +38,12 @@ export default function ContactPage() {
               <p>{address.line2}</p>
               <p>{address.city}</p>
               <p>
-                <a href={`tel:${address.phone.replace(/\s/g, '')}`}>{address.phone}</a>
+                {address.phones.map(({ display, tel }) => (
+                  <span key={tel}>
+                    <a href={`tel:${tel.replace(/\s/g, '')}`}>{display}</a>
+                    <br />
+                  </span>
+                ))}
               </p>
               <p>
                 <a href={`mailto:${address.email}`}>{address.email}</a>
@@ -54,7 +64,7 @@ export default function ContactPage() {
           </div>
           <div className="contact-forms">
             <div id="admission">
-              <AdmissionInquiryForm whatsappNumber={address.phone} />
+              <AdmissionInquiryForm whatsappNumber="+91 87223 50513" />
             </div>
           </div>
         </div>

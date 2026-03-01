@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 
-/** Normalize phone to WhatsApp format: digits only, with country code (e.g. 919876543210) */
+/** Normalize phone to WhatsApp format: digits only, with country code (e.g. 918722350513) */
 function toWhatsAppNumber(phone: string): string {
   const digits = phone.replace(/\D/g, '')
   if (digits.length === 10 && !phone.startsWith('+')) return '91' + digits
@@ -10,11 +10,11 @@ function toWhatsAppNumber(phone: string): string {
 }
 
 type AdmissionInquiryFormProps = {
-  /** College WhatsApp number (e.g. +91 98765 43210). Enquiry is sent to this number. */
+  /** College WhatsApp number (e.g. +91 87223 50513). Enquiry is sent to this number. */
   whatsappNumber?: string
 }
 
-const DEFAULT_WHATSAPP = '919876543210'
+const DEFAULT_WHATSAPP = '918722350513'
 
 export function AdmissionInquiryForm({ whatsappNumber }: AdmissionInquiryFormProps) {
   const [status, setStatus] = useState<'idle' | 'opening' | 'done'>('idle')

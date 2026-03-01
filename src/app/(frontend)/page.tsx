@@ -8,14 +8,26 @@ import { AdmissionInquiryForm } from '@/components/ContactForms'
 import { getGalleryFunctions } from '@/lib/gallery'
 
 const facilities = [
-  { title: 'Smart Class Rooms', description: 'Classrooms are designed for accomodating 40-60 students which fullfills the guidlince given by the regulatory bodies. Every classroom is provided with ergonomically designed seating arrangement, smart board and cctv camera. Each batch has separate classroom with necessary facilities.', image: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600' },
-  { title: 'Laboratory', description: 'Inovative teaching methods are used with the help of Laboratories according to the specialities furthur more enhancing the learning experience and along with well equiped computer lab.', image: 'https://images.unsplash.com/photo-1587351021759-3e566b6af7cc?w=600' },
-  { title: 'Hospital', description: 'College is attached with 100 bedded parent Hospital in campus along with attached Hospital for specialities.', image: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=600' },
+  { title: 'Smart Class Rooms', description: 'Classrooms are designed for accomodating 40-60 students which fullfills the guidlince given by the regulatory bodies. Every classroom is provided with ergonomically designed seating arrangement, smart board and cctv camera. Each batch has separate classroom with necessary facilities.', image: '/media/smartclass.jpeg' },
+  { title: 'Laboratory', description: 'Inovative teaching methods are used with the help of Laboratories according to the specialities furthur more enhancing the learning experience and along with well equiped computer lab.', image: '/media/laboratory.png' },
+  { title: 'Hospital', description: 'College is attached with 100 bedded parent Hospital in campus along with attached Hospital for specialities.', image: '/media/frontdesk.jpeg' },
   { title: 'Hostel', description: 'Provision for safe and secure inhouse hostel facilities with mess services. Keeping in mind, "Cleanliness is Godliness". Hostel are equipped with CCTV, safe drinking water and security with efficient warden available 24/7.', image: 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=600' },
   { title: 'Multipurpose Hall', description: 'Available to conduct events, workshop and seminar.', image: 'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=600' },
+  { title: 'ICU Unit', description: 'State-of-the-art Intensive Care Unit with advanced monitoring and life-support equipment for critical care training and patient care.', image: '/media/ICU.jpeg' },
 ]
 
-const address = { line1: 'Dr V P Kanakaraddi Memorial College Of Nursing', line2: 'Campus Address', city: 'Karnataka', phone: '+91 98765 43210', email: 'info@vpkmcn.edu.in' }
+const address = {
+  line1: 'The Dr V P Kanakaraddi Memorial College Of Nursing',
+  line2: 'Main Road, Venkatesh Hospital, Mahalingpur',
+  city: 'Bagalkote - 587312',
+  phones: [
+    { display: '08350-271236', tel: '+918350271236' },
+    { display: '08350-200106', tel: '+918350200106' },
+    { display: '8792616004', tel: '+918792616004' },
+    { display: '8722350513', tel: '+918722350513' },
+  ],
+  email: 'info@vpkmcn.edu.in',
+}
 
 // Revalidate so new gallery functions (and other CMS content) show without redeploying.
 export const revalidate = 60
@@ -30,7 +42,7 @@ export default async function HomePage() {
             <h1 className="hero-title">DR V P Kanakaraddi Memorial College Of Nursing</h1>
             <p className="hero-tagline">Care, Compassion, Excellence</p>
             <div className="hero-cta">
-              <Link href="/admissions" className="btn btn-hero">Apply Now</Link>
+              <Link href="/#contact" className="btn btn-hero">Apply Now</Link>
             </div>
           </div>
         </div>
@@ -72,19 +84,19 @@ export default async function HomePage() {
         <div className="why-choose-grid">
           <div className="why-choose-card">
             <div className="why-choose-card-image">
-              <Image src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600" alt="Modern Infrastructure" fill sizes="(max-width: 768px) 100vw, 33vw" />
+              <Image src="/media/classroom.jpeg" alt="Modern Infrastructure" fill sizes="(max-width: 768px) 100vw, 33vw" />
             </div>
             <div className="why-choose-card-bar"><h3>Modern Infrastructure</h3><p>Well-equipped classrooms and smart learning facilities.</p></div>
           </div>
           <div className="why-choose-card">
             <div className="why-choose-card-image">
-              <Image src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=600" alt="Expert Faculty" fill sizes="(max-width: 768px) 100vw, 33vw" />
+              <Image src="/media/hospital.jpeg" alt="Expert Faculty" fill sizes="(max-width: 768px) 100vw, 33vw" />
             </div>
             <div className="why-choose-card-bar"><h3>Expert Faculty</h3><p>Experienced teaching staff committed to your growth.</p></div>
           </div>
           <div className="why-choose-card">
             <div className="why-choose-card-image">
-              <Image src="https://images.unsplash.com/photo-1587351021759-3e566b6af7cc?w=600" alt="Advanced Labs" fill sizes="(max-width: 768px) 100vw, 33vw" />
+              <Image src="/media/lab.png" alt="Advanced Labs" fill sizes="(max-width: 768px) 100vw, 33vw" />
             </div>
             <div className="why-choose-card-bar"><h3>Advanced Labs</h3><p>State-of-the-art labs and simulation facilities.</p></div>
           </div>
@@ -198,7 +210,7 @@ export default async function HomePage() {
         <h2 className="section-title">Our Faculties</h2>
         <div className="content-with-image">
           <div className="content-with-image-media">
-            <Image src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=600" alt="Nursing education" fill sizes="(max-width: 768px) 100vw, 40vw" />
+            <Image src="/media/hospital.jpeg" alt="Our faculties and students at Dr V P Kanakaraddi Memorial College Of Nursing" fill sizes="(max-width: 768px) 100vw, 40vw" />
           </div>
           <div className="content-with-image-body">
             <p>Our Faculties believe in providing nursing education based and built on scientific principles and sound educational theory and practice in order to prepare professionally qualified nurses, who will be able to function as a team member, in all health care agencies in the role of a practicing nurse. The graduate with experience can rapidly move into leadership positions in Nursing Education, Nursing Service and Administration.</p>
@@ -212,7 +224,7 @@ export default async function HomePage() {
         <div className="student-life-inner">
           <div className="students-activities-block student-life-card">
             <div className="students-activities-image">
-              <Image src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=1200" alt="Students activities and cultural events" fill sizes="100vw" />
+              <Image src="/media/studentlife.jpeg" alt="Student life: oath taking and lamp lighting ceremony at the college" fill sizes="100vw" />
             </div>
             <div className="students-activities-body content-block">
               <h3 className="content-heading">Students Activities</h3>
@@ -266,7 +278,14 @@ export default async function HomePage() {
               <p>{address.line1}</p>
               <p>{address.line2}</p>
               <p>{address.city}</p>
-              <p><a href={`tel:${address.phone.replace(/\s/g, '')}`}>{address.phone}</a></p>
+              <p>
+                {address.phones.map(({ display, tel }) => (
+                  <span key={tel}>
+                    <a href={`tel:${tel.replace(/\s/g, '')}`}>{display}</a>
+                    <br />
+                  </span>
+                ))}
+              </p>
               <p><a href={`mailto:${address.email}`}>{address.email}</a></p>
             </address>
             <div className="contact-map">
@@ -274,7 +293,7 @@ export default async function HomePage() {
             </div>
           </div>
           <div className="contact-forms">
-            <div id="admission"><AdmissionInquiryForm whatsappNumber={address.phone} /></div>
+            <div id="admission"><AdmissionInquiryForm whatsappNumber="+91 87223 50513" /></div>
           </div>
         </div>
       </section>

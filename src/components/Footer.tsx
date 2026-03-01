@@ -23,7 +23,13 @@ export function Footer() {
             <h3 className="footer-title">Dr V P Kanakaraddi Memorial College Of Nursing</h3>
             <p className="footer-tagline">Excellence in Nursing Education</p>
             <p className="footer-contact">
-              <a href="tel:+919876543210">+91 98765 43210</a>
+              <a href="tel:+918350271236">08350-271236</a>
+              <br />
+              <a href="tel:+918350200106">08350-200106</a>
+              <br />
+              <a href="tel:+918792616004">8792616004</a>
+              <br />
+              <a href="tel:+918722350513">8722350513</a>
               <br />
               <a href="mailto:info@vpkmcn.edu.in">info@vpkmcn.edu.in</a>
             </p>
