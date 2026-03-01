@@ -42,21 +42,52 @@ export async function getGalleryFunctions(): Promise<GalleryFunctionItem[]> {
     collection: 'gallery-functions',
     limit: 50,
     sort: '-createdAt',
-    depth: 2,
+    depth: 3, // populate items[].image (nested relation to media)
   })
 
-  return result.docs
-    .filter((doc) => doc.items && doc.items.length > 0 && doc.show !== false)
-    .map((doc) => ({
-      id: String(doc.id),
-      name: doc.name,
-      description: doc.description ?? null,
-      images: doc.items!
-        .filter(
-          (item): item is typeof item & { image: Media } =>
-            item.show !== false && item.image != null && typeof item.image === 'object' && 'url' in item.image,
-        )
-        .map((item) => mediaToImage(item.image, item.caption)),
-    }))
-    .filter((f) => f.images.length > 0)
+  const itemsWithResolvedImages: { doc: (typeof result.docs)[0]; images: GalleryImage[] }[] = []
+
+  for (const doc of result.docs) {
+    if (!doc.items?.length || doc.show === false) continue
+    const images: GalleryImage[] = []
+    const mediaIdsToFetch: number[] = []
+    const idOnlyIndices: number[] = [] // index in doc.items for each id in mediaIdsToFetch
+    for (let i = 0; i < doc.items.length; i++) {
+      const item = doc.items[i]
+      if (item.show === false || item.image == null) continue
+      if (typeof item.image === 'object' && 'url' in item.image) {
+        images.push(mediaToImage(item.image as Media, item.caption))
+      } else if (typeof item.image === 'number') {
+        mediaIdsToFetch.push(item.image)
+        idOnlyIndices.push(i)
+      }
+    }
+    if (mediaIdsToFetch.length > 0) {
+      const mediaDocs = await payload.find({
+        collection: 'media',
+        where: { id: { in: mediaIdsToFetch } },
+        limit: mediaIdsToFetch.length,
+        depth: 1,
+      })
+      const mediaById = new Map(mediaDocs.docs.map((m) => [m.id, m]))
+      for (let j = 0; j < mediaIdsToFetch.length; j++) {
+        const media = mediaById.get(mediaIdsToFetch[j])
+        const item = doc.items![idOnlyIndices[j]]
+        if (media?.url && item) images.push(mediaToImage(media, item.caption))
+      }
+    }
+    if (images.length > 0) {
+      itemsWithResolvedImages.push({
+        doc,
+        images,
+      })
+    }
+  }
+
+  return itemsWithResolvedImages.map(({ doc, images }) => ({
+    id: String(doc.id),
+    name: doc.name,
+    description: doc.description ?? null,
+    images,
+  }))
 }
