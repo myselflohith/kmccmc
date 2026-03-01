@@ -100,6 +100,7 @@ export default async function HomePage() {
         </div>
         <div className="about-leadership">
           <LeadershipMessages
+            directorImage="/media/director.jpeg"
             director={
               <>
                 <p>Dear Principal, faculty &amp; students greeting of peace to all of you &amp; heartly welcome to The Dr V P Kanakaraddi Memorial College Of Nursing. A unit of Om Sai Education Society&apos;s.</p>

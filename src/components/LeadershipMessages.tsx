@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import React, { useState } from 'react'
 
 type TabId = 'director' | 'management' | 'principal'
@@ -14,9 +15,11 @@ type LeadershipMessagesProps = {
   director: React.ReactNode
   management: React.ReactNode
   principal: React.ReactNode
+  /** Optional image URL for the Director (e.g. /media/director.jpeg). */
+  directorImage?: string
 }
 
-export function LeadershipMessages({ director, management, principal }: LeadershipMessagesProps) {
+export function LeadershipMessages({ director, management, principal, directorImage }: LeadershipMessagesProps) {
   const [active, setActive] = useState<TabId>('director')
   const [expandedPanels, setExpandedPanels] = useState<Set<TabId>>(new Set())
 
@@ -57,6 +60,7 @@ export function LeadershipMessages({ director, management, principal }: Leadersh
         {TABS.map(({ id }) => {
           const isExpanded = expandedPanels.has(id)
           const isActive = active === id
+          const showDirectorImage = id === 'director' && directorImage
           return (
             <div
               key={id}
@@ -67,9 +71,21 @@ export function LeadershipMessages({ director, management, principal }: Leadersh
               className="leadership-panel"
             >
               <div
-                className={`leadership-panel-inner ${!isExpanded ? 'leadership-panel-inner--collapsed' : ''}`}
+                className={`leadership-panel-inner ${!isExpanded ? 'leadership-panel-inner--collapsed' : ''} ${showDirectorImage ? 'leadership-panel-inner--with-image' : ''}`}
               >
-                {content[id]}
+                {showDirectorImage && (
+                  <div className="leadership-panel-image">
+                    <Image
+                      src={directorImage}
+                      alt="Director"
+                      width={240}
+                      height={280}
+                      className="leadership-photo"
+                      unoptimized={!directorImage.startsWith('https://')}
+                    />
+                  </div>
+                )}
+                <div className="leadership-panel-content">{content[id]}</div>
               </div>
               <div className="leadership-panel-actions">
                 <button

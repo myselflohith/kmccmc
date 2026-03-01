@@ -578,6 +578,34 @@ svg {
   color: var(--color-primary);
 }
 
+/* Director (or other) photo beside message */
+.leadership-panel-inner--with-image {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.leadership-panel-image {
+  flex-shrink: 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.leadership-photo {
+  display: block;
+  width: 240px;
+  height: auto;
+  object-fit: cover;
+  aspect-ratio: 6/7;
+}
+
+.leadership-panel-content {
+  flex: 1;
+  min-width: 0;
+}
+
 .leadership-panel-actions {
   display: none;
 }
@@ -610,6 +638,13 @@ svg {
   }
   .leadership-panel-inner {
     padding: 1.5rem 1.25rem;
+  }
+  .leadership-panel-inner--with-image {
+    flex-direction: column;
+    align-items: center;
+  }
+  .leadership-photo {
+    width: 180px;
   }
   .leadership-panel-inner--collapsed {
     max-height: 10rem;
@@ -1389,7 +1424,7 @@ svg {
   color: var(--color-white);
   padding: 0;
   box-sizing: border-box;
-  background-image: url('https://images.unsplash.com/photo-1562774053-701939374585?w=1920');
+  background-image: url('/media/banner.jpeg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
