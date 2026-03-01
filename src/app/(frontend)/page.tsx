@@ -17,6 +17,9 @@ const facilities = [
 
 const address = { line1: 'Dr V P Kanakaraddi Memorial College Of Nursing', line2: 'Campus Address', city: 'Karnataka', phone: '+91 98765 43210', email: 'info@vpkmcn.edu.in' }
 
+// Revalidate so new gallery functions (and other CMS content) show without redeploying.
+export const revalidate = 60
+
 export default async function HomePage() {
   const galleryFunctions = await getGalleryFunctions()
   return (

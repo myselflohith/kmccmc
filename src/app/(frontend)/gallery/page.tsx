@@ -7,6 +7,8 @@ export const metadata = {
   description: 'Campus and college life in pictures.',
 }
 
+export const revalidate = 60
+
 export default async function GalleryPage() {
   const galleryFunctions = await getGalleryFunctions()
   return (
